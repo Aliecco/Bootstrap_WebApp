@@ -25,10 +25,4 @@ public class UserController {
         model.addAttribute("user", user);
         return "users/show";
     }
-
-//    @GetMapping("/edit")
-//    public String edit(Model model, @PathVariable("id") Long id) {
-//        model.addAttribute("user", service.findById(id));
-//        return "users/edit";
-//    }
 }
