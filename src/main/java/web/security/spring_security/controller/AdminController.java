@@ -25,33 +25,47 @@ public class AdminController {
         User user = service.findByEmail(principal.getName());
         model.addAttribute("user", user);
         model.addAttribute("users", service.findAll());
-        return "users/index";
-    }
-
-    @GetMapping("/{id}")
-    public String show(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("user", service.findById(id));
-        return "users/show";
-    }
-
-    @GetMapping("/new")
-    public String newUser(@ModelAttribute("user") User user, Model model) {
         model.addAttribute("roles", roleService.getAllRoles());
-        return "users/new";
+        return "users/admin";
     }
+
+//    @GetMapping("/{id}")
+//    public String show(@PathVariable("id") Long id, Model model) {
+//        model.addAttribute("user", service.findById(id));
+//        return "users/admin";
+//    }
+
+//    @GetMapping("/new")
+//    public String newUser(@ModelAttribute("user") User user, Model model) {
+//        model.addAttribute("roles", roleService.getAllRoles());
+//        return "users/admin";
+//    }
 
     @PostMapping("/new")
-    public String create(@ModelAttribute("user") User user, @RequestParam(value = "roles") String[] roles) {
+    public String create(@ModelAttribute("user") User user,
+                         @RequestParam(value = "roles") String[] roles) {
+        System.out.println(user.getFirstName()+user.getLastName()+user.getPassword());
         user.setRoles(roleService.getSetOfRoles(roles));
+        System.out.println(user.getRoles());
         service.saveUser(user);
         return "redirect:/admin";
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") Long id) {
+    public String edit(@ModelAttribute("user") User user,
+                       Model model,
+                       @PathVariable("id") Long id,
+                       @RequestParam(value = "editRoles") String[] roles) {
+        user.setRoles(roleService.getSetOfRoles(roles));
+        model.addAttribute("roles", roleService.getAllRoles());
         model.addAttribute("user", service.findById(id));
-        return "users/edit";
+        return "users/admin";
     }
+//    public String edit(Model model,
+//                       @PathVariable("id") Long id) {
+//        model.addAttribute("user", service.findById(id));
+//        return "users/admin";
+//    }
 
     @PostMapping("/{id}/edit")
     public String update(@ModelAttribute("user") User user,
@@ -62,7 +76,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @PostMapping("/{id}")
+    @GetMapping("/{id}/delete")
     public String delete(@PathVariable("id") Long id) {
         service.deleteById(id);
         return "redirect:/admin";
