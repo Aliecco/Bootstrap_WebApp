@@ -1,9 +1,6 @@
 Задание:
 1. Изменить страницы вашего приложения(https://github.com/Aliecco/Spring_Security.git) в соответствии со скриншотами, используя Bootstrap.
 
-Ссылки: https://drive.google.com/file/d/1g32R1BmNASW5MRcLtwJWTn6ZROTMOVGJ/
-https://bootstrap-4.ru/docs/4.3.1/getting-started/introduction/
-
 ![image](https://user-images.githubusercontent.com/79269942/165161975-d68958e9-ea44-4201-b27b-a6a3c542f165.png)
 ![image](https://user-images.githubusercontent.com/79269942/165162679-9ff384f3-25f5-4656-a484-6d7179770f1b.png)
 ![image](https://user-images.githubusercontent.com/79269942/165162906-29c22801-c723-4a01-a606-851658c0e8d8.png)
