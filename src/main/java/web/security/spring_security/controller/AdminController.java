@@ -14,10 +14,14 @@ import java.security.Principal;
 @RequestMapping("/admin")
 public class AdminController {
 
+    private final UserService service;
+    private final RoleService roleService;
+
     @Autowired
-    private UserService service;
-    @Autowired
-    private RoleService roleService;
+    public AdminController(UserService service, RoleService roleService) {
+        this.service = service;
+        this.roleService = roleService;
+    }
 
     @GetMapping
     public String index(Principal principal,
@@ -28,18 +32,6 @@ public class AdminController {
         model.addAttribute("roles", roleService.getAllRoles());
         return "users/admin";
     }
-
-//    @GetMapping("/{id}")
-//    public String show(@PathVariable("id") Long id, Model model) {
-//        model.addAttribute("user", service.findById(id));
-//        return "users/admin";
-//    }
-
-//    @GetMapping("/new")
-//    public String newUser(@ModelAttribute("user") User user, Model model) {
-//        model.addAttribute("roles", roleService.getAllRoles());
-//        return "users/admin";
-//    }
 
     @PostMapping("/new")
     public String create(@ModelAttribute("user") User user,
@@ -61,11 +53,6 @@ public class AdminController {
         model.addAttribute("user", service.findById(id));
         return "users/admin";
     }
-//    public String edit(Model model,
-//                       @PathVariable("id") Long id) {
-//        model.addAttribute("user", service.findById(id));
-//        return "users/admin";
-//    }
 
     @PostMapping("/{id}/edit")
     public String update(@ModelAttribute("user") User user,
